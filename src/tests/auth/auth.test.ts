@@ -23,7 +23,7 @@ describe('auth test suite', () => {
   });
 
   test('login succedeed', async () => {
-    const response = await authRequests.login("test@test.org", process.env.AUTH_PASSWORD)
+    const response = await authRequests.login("test@test.org", process.env.TEST_AUTH_PASSWORD)
     expect(response.statusCode).toBe(200)
     expect(response.body).toHaveProperty('id')
     expect(response.body).toHaveProperty('email')
