@@ -11,4 +11,5 @@ export default {
   },
   
   setupFiles: ["dotenv/config"],
+  reporters: [['github-actions', {silent: false}], 'summary'],
 };
