@@ -14,14 +14,16 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       # Cache dependencies
+      - uses: actions/setup-node@v4
       - name: Cache Node.js modules
-        uses: actions/cache@v3
+        uses: actions/cache@v4
         with:
           path: ~/.npm
           key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
           restore-keys: |
             ${{ runner.os }}-node-
-      - name: Run Tests
-        run: |
-          npm install
-          npm run test
+      - run: npm install
+      - name: Run Tests 
+        run: npm run test
+      - name: Publish Test Summary Results
+        run: npx github-actions-ctrf ctrf/ctrf-report.json

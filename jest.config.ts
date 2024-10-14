@@ -11,5 +11,8 @@ export default {
   },
   
   setupFiles: ["dotenv/config"],
-  reporters: [['github-actions', {silent: false}], 'summary'],
+  reporters: [
+    'default',
+    ['jest-ctrf-json-reporter', {}],
+  ],
 };
