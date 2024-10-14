@@ -1,6 +1,6 @@
 import { INestApplication } from '@nestjs/common';
 import { AuthRequests } from "./auth.requests"
-import { getApp } from '../common'
+import { getApp } from '../../util/nestjs.util';
 import { NestApplication } from '@nestjs/core';
 
 let authRequests: AuthRequests;
