@@ -28,7 +28,8 @@ describe('users test suite', () => {
   });
 
   test('signup failed - empty password', async () => {
-    const response = await usersRequests.signUp("valid_email@mail.com", "TEST", "")
+    const randomEmail = Math.random().toString(36).slice(2) + "@test.org"
+    const response = await usersRequests.signUp(randomEmail, "TEST", "")
     expect(response.statusCode).toBe(400)
     expect(response.body.message).toBe('invalid password')
   });
