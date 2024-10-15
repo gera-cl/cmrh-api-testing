@@ -24,14 +24,14 @@ describe('users test suite', () => {
   test('signup failed - invalid email', async () => {
     const response = await usersRequests.signUp("invalid_email@", "TEST", randomText())
     expect(response.statusCode).toBe(400)
-    expect(response.body.message).toBe('invalid email')
+    expect(response.body.message).toContain('email must be an email')
   });
 
   test('signup failed - empty password', async () => {
-    const randomEmail = Math.random().toString(36).slice(2) + "@test.org"
+    const randomEmail = randomText() + "@test.org"
     const response = await usersRequests.signUp(randomEmail, "TEST", "")
     expect(response.statusCode).toBe(400)
-    expect(response.body.message).toBe('invalid password')
+    expect(response.body.message).toContain('masterPassword should not be empty')
   });
 
   test('signup failed - duplicate email', async () => {
@@ -42,14 +42,14 @@ describe('users test suite', () => {
   });
 
   test('signup succedeed', async () => {
-    const randomEmail = Math.random().toString(36).slice(2) + "@test.org"
+    const randomEmail = randomText() + "@test.org"
     const response = await usersRequests.signUp(randomEmail, "TEST", randomText())
     expect(response.statusCode).toBe(201)
     expect(Object.keys(response.body).sort()).toEqual(['email', 'id', 'name'].sort())
   });
 
   test('signup succedeed - first login', async () => {
-    const randomEmail = randomText()
+    const randomEmail = randomText() + "@test.org"
     const randomPassword = randomText()
     const response = await usersRequests.signUp(randomEmail, "TEST", randomPassword)
     expect(response.statusCode).toBe(201)

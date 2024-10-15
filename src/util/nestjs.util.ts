@@ -1,4 +1,4 @@
-import { INestApplication } from '@nestjs/common';
+import { INestApplication, ValidationPipe } from '@nestjs/common';
 import { Test, TestingModule } from '@nestjs/testing';
 
 export async function getApp(): Promise<string | INestApplication<any>> {
@@ -11,6 +11,7 @@ export async function getApp(): Promise<string | INestApplication<any>> {
     })
       .compile();
     const nestApplication = moduleFixture.createNestApplication();
+    nestApplication.useGlobalPipes(new ValidationPipe())
     await nestApplication.init()
     return nestApplication;
   }
