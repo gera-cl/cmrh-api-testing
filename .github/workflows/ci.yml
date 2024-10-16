@@ -1,7 +1,4 @@
-on:
-  pull_request:
-  push:
-    branches: [main]
+on: workflow_dispatch
 
 env:
   BASE_URL: ${{ secrets.BASE_URL }}
