@@ -11,13 +11,8 @@ let app: string | INestApplication<any>
 
 beforeAll(async () => {
   app = await getApp();
-  if (app instanceof NestApplication) {
-    usersRequests = new UsersRequests(app.getHttpServer(), process.env.APIKEY)
-    authRequests = new AuthRequests(app.getHttpServer(), process.env.APIKEY)
-  } else if (typeof (app) === "string") {
-    usersRequests = new UsersRequests(app, process.env.APIKEY)
-    authRequests = new AuthRequests(app, process.env.APIKEY)
-  }
+  usersRequests = new UsersRequests(app, process.env.APIKEY)
+  authRequests = new AuthRequests(app, process.env.APIKEY)
 }, 15000)
 
 describe('users test suite', () => {
